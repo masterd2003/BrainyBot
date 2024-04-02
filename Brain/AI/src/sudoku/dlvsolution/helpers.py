@@ -22,6 +22,12 @@ class Edge:
     def get_y(self):
         return self.y
     
+    def get_xOnScreen(self):
+        return 500
+    
+    def get_yOnScreen(self):
+        return 500
+    
     def get_value(self):
         return self.value
     

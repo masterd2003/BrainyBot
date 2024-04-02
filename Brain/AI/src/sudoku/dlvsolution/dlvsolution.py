@@ -71,6 +71,8 @@ class DLVSolution:
             if isinstance(obj, Edge):
                 moves.append(obj)
             else: print("Not an edge, this is not supposed to happen")
+        
+        return moves
 
 
 
