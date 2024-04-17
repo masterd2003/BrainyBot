@@ -5,7 +5,7 @@ from languages.predicate import Predicate
 from AI.src.abstraction.object_graph import ObjectGraph
 from platforms.desktop.desktop_handler import DesktopHandler
 from specializations.dlv2.desktop.dlv2_desktop_service import DLV2DesktopService
-from AI.src.candy_crush.object_graph.constants import TYPE, ID
+# from AI.src.candy_crush.object_graph.constants import TYPE, ID
 from AI.src.constants import DLV_PATH
 
 # make the fact classes here with the correct attributes eg class Edge makes asp fact edge(x, y, value)
@@ -202,35 +202,35 @@ def chooseDLVSystem() -> DesktopHandler:
         print(e)
 
 
-def get_input_dlv_nodes(graph: ObjectGraph) -> []:
-    nodesAndInformation = []
-    for node in graph.get_nodes():
+# def get_input_dlv_nodes(graph: ObjectGraph) -> []:
+#     nodesAndInformation = []
+#     for node in graph.get_nodes():
 
-        result = re.search(r"^(\w+)\.(?:png|jpeg|jpg)$", node[TYPE])
-        candyType = result.groups()[0]
+#         result = re.search(r"^(\w+)\.(?:png|jpeg|jpg)$", node[TYPE])
+#         candyType = result.groups()[0]
 
-        # checks if the node2 is not swappable
-        if "notTouch" in candyType:
-            continue
+#         # checks if the node2 is not swappable
+#         if "notTouch" in candyType:
+#             continue
 
-        if "Bomb" in candyType:
-            result = re.search(r"^(\w+)(?:Bomb)$", candyType)
-            candyType = result.groups()[0]
-            nodesAndInformation.append(InputBomb(node[ID]))
+#         if "Bomb" in candyType:
+#             result = re.search(r"^(\w+)(?:Bomb)$", candyType)
+#             candyType = result.groups()[0]
+#             nodesAndInformation.append(InputBomb(node[ID]))
 
-        if "Horizontal" in candyType:
-            result = re.search(r"^(\w+)(?:Horizontal)$", candyType)
-            candyType = result.groups()[0]
-            nodesAndInformation.append(InputHorizontal(node[ID]))
+#         if "Horizontal" in candyType:
+#             result = re.search(r"^(\w+)(?:Horizontal)$", candyType)
+#             candyType = result.groups()[0]
+#             nodesAndInformation.append(InputHorizontal(node[ID]))
 
-        if "Vertical" in candyType:
-            result = re.search(r"^(\w+)(?:Vertical)$", candyType)
-            candyType = result.groups()[0]
-            nodesAndInformation.append(InputVertical(node[ID]))
+#         if "Vertical" in candyType:
+#             result = re.search(r"^(\w+)(?:Vertical)$", candyType)
+#             candyType = result.groups()[0]
+#             nodesAndInformation.append(InputVertical(node[ID]))
 
-        nodesAndInformation.append(InputNode(node[ID], candyType))
+#         nodesAndInformation.append(InputNode(node[ID], candyType))
 
-    return nodesAndInformation
+#     return nodesAndInformation
 
 
 # def get_edges(graph: ObjectGraph) -> [Edge]:

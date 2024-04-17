@@ -30,8 +30,8 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
                    [0, 0, 0, 0, 0, 0, 1, 2, 3],
                    [0, 1, 2, 3, 0, 0, 8, 0, 4],
                    [0, 8, 0, 4, 0, 0, 7, 6, 5],
-                   [0, 7, 6, 5, 0, 0, 0, 0, 0],]
-
+                   [0, 7, 6, 5, 0, 0, 0, 0, 0]]
+    
     # if fieldmatrix!=None:
     #     input,colors,tubes,balls,on = asp_input(balls_chart)
     # else:

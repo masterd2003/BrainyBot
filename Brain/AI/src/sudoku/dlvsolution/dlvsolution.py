@@ -1,19 +1,11 @@
 # imports fixen
 import os
 
-from languages.asp.asp_input_program import ASPInputProgram
-
-from AI.src.candy_crush.constants import RESOURCES_PATH
-from AI.src.candy_crush.dlvsolution.helpers import chooseDLVSystem, InputNode, Edge, Swap, assert_true
-
-
-import os
-
 from base.option_descriptor import OptionDescriptor
 from languages.asp.asp_input_program import ASPInputProgram
 from languages.asp.asp_mapper import ASPMapper
 
-from AI.src.ball_sort.constants import RESOURCES_PATH, MAX_STEPS, LOOK_AHEAD
+from AI.src.sudoku.constant import RESOURCES_PATH
 # from AI.src.ball_sort.dlvsolution.helpers import choose_dlv_system, Color, Ball, Tube, Move, On, GameOver
 from AI.src.sudoku.dlvsolution.helpers import chooseDLVSystem, Edge
 
@@ -42,6 +34,7 @@ class DLVSolution:
 
     def __init_fixed(self):
         self.__fixed_input_program.add_files_path(os.path.join(RESOURCES_PATH, "sudoku.txt"))
+        # self.__fixed_input_program.add_files_path("/home/david/Documents/GitHub/BrainyBot/Brain/AI/src/sudoku/resources/sudoku.txt")
 
     # main function that calls the asp solver
     def call_asp(self, fieldmatrix: []):
@@ -54,13 +47,24 @@ class DLVSolution:
         self.__init_fixed()
 
         # hier kijken voor of de facts fout zijn
-        print(self.__static_facts)
-        print(self.__static_facts)
+        print("static facts")
+        print(self.__static_facts.get_programs())
+
+        print("fixed input program")
+
+        print(self.__fixed_input_program.get_programs())
+        print(self.__fixed_input_program.get_files_paths())
+        print("kroketjes")
         self.__handler.add_program(self.__static_facts)
         self.__handler.add_program(self.__fixed_input_program)
+        print("handler")
+        print(self.__handler.get_input_program(0).get_programs())
+        # for i in self.__handler._collect_options(None):
+        #     print(i.get_programs())
+        print("einde handler")
 
-        option = OptionDescriptor("--filter=on/4, move/3, gameOver/1")
-        self.__handler.add_option(option)
+        # option = OptionDescriptor("--filter=on/4, move/3, gameOver/1")
+        # self.__handler.add_option(option)
 
         moves = []
         # ons = []
