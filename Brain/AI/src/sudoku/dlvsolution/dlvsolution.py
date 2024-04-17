@@ -1,3 +1,4 @@
+# imports fixen
 import os
 
 from languages.asp.asp_input_program import ASPInputProgram
@@ -52,6 +53,9 @@ class DLVSolution:
         # add the sudoku rules
         self.__init_fixed()
 
+        # hier kijken voor of de facts fout zijn
+        print(self.__static_facts)
+        print(self.__static_facts)
         self.__handler.add_program(self.__static_facts)
         self.__handler.add_program(self.__fixed_input_program)
 
