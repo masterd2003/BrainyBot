@@ -36,6 +36,70 @@ class Edge(Predicate):
     
     def __str__(self):
         return f"({self.x}, {self.y}, {self.value})\n"
+    
+class X(Predicate):
+    predicate_name = "x"
+
+    def __init__(self, x):
+        Predicate.__init__(self, [("x", int)])
+        self.x = x
+    
+    def get_x(self):
+        return self.x
+    
+    def __str__(self):
+        return f"({self.x})\n"
+    
+class Y(Predicate):
+    predicate_name = "y"
+
+    def __init__(self, y):
+        Predicate.__init__(self, [("y", int)])
+        self.y = y
+    
+    def get_y(self):
+        return self.y
+    
+    def __str__(self):
+        return f"({self.y})\n"
+    
+class N(Predicate):
+    predicate_name = "n"
+
+    def __init__(self, n):
+        Predicate.__init__(self, [("n", int)])
+        self.n = n
+    
+    def get_n(self):
+        return self.n
+    
+    def __str__(self):
+        return f"({self.n})\n"
+    
+class SubGrid(Predicate):
+    predicate_name = "subgrid"
+
+    def __init__(self, x, y, a, b):
+        Predicate.__init__(self, [("x", int), ("y", int), ("a", int), ("b", int)])
+        self.x = x
+        self.y = y
+        self.a = a
+        self.b = b
+    
+    def get_x(self):
+        return self.x
+    
+    def get_y(self):
+        return self.y
+    
+    def get_a(self):
+        return self.a
+    
+    def get_b(self):
+        return self.b
+    
+    def __str__(self):
+        return f"({self.x}, {self.y}, {self.a}, {self.b})\n"
 
 
 # class Connect:

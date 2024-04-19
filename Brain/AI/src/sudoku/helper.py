@@ -22,6 +22,16 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
     # print(matcher.find_numbers())
     debug = False
 
+    zeros = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
     fieldmatrix = [[0, 0, 0, 0, 0, 1, 2, 3, 0],
                    [1, 2, 3, 0, 0, 8, 0, 4, 0],
                    [8, 0, 4, 0, 0, 7, 6, 5, 0],
@@ -50,15 +60,22 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
 
     os.chdir(CLIENT_PATH)
 
-    coordinates = []
     button_x, button_y, x, y = 0, 0, 0, 0
-    if len(moves)==0:
+    if moves == zeros:
         print("No moves found.")
         return
     feedback=Feedback()
     
     for i in range(len(moves)):
-        print(moves[i])
+        for j in range(len(moves[0])):
+            x_botton = "x coordinaat van knop " + str(moves[i][j])
+            y_button = "y coordinaat van knop " + str(moves[i][j])
+            x = "x coordinaat van vakje" + str(i + 1) + ", " + str(j + 1)
+            y = "y coordinaat van vakje" + str(i + 1) + ", " + str(j + 1)
+            print(x_botton, "; ", y_button)
+            print(x , "; ", y)
+
+            
 
 def sudoku1(screenshot, debug = False, validation=None,iteration=0):
     matcher = MatchingSudoku(screenshot,debug,validation,iteration)

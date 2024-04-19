@@ -4,6 +4,7 @@ import os
 from base.option_descriptor import OptionDescriptor
 from languages.asp.asp_input_program import ASPInputProgram
 from languages.asp.asp_mapper import ASPMapper
+import numpy as np
 
 from AI.src.sudoku.constant import RESOURCES_PATH
 # from AI.src.ball_sort.dlvsolution.helpers import choose_dlv_system, Color, Ball, Tube, Move, On, GameOver
@@ -34,6 +35,7 @@ class DLVSolution:
 
     def __init_fixed(self):
         self.__fixed_input_program.add_files_path(os.path.join(RESOURCES_PATH, "sudoku.txt"))
+        # self.__fixed_input_program.add_files_path(os.path.join(RESOURCES_PATH, "sudoku.txt"))
         # self.__fixed_input_program.add_files_path("/home/david/Documents/GitHub/BrainyBot/Brain/AI/src/sudoku/resources/sudoku.txt")
 
     # main function that calls the asp solver
@@ -53,12 +55,17 @@ class DLVSolution:
         print("fixed input program")
 
         print(self.__fixed_input_program.get_programs())
+        
+        print("fixed input program path")
         print(self.__fixed_input_program.get_files_paths())
         print("kroketjes")
         self.__handler.add_program(self.__static_facts)
         self.__handler.add_program(self.__fixed_input_program)
         print("handler")
+        print("handler 1")
         print(self.__handler.get_input_program(0).get_programs())
+        print("handler 2")
+        print(self.__handler.get_input_program(1).get_programs())
         # for i in self.__handler._collect_options(None):
         #     print(i.get_programs())
         print("einde handler")
@@ -71,11 +78,51 @@ class DLVSolution:
 
         # asp is called here and then you get the answer set
         answer_sets = self.__handler.start_sync()
+
+        # print (f"Answer sets: {answer_sets.get_output()}")
+
+        splitList = answer_sets.get_output().split(", ")
+        cellList = []
+        for i in splitList:
+            if "sudoku" in i:
+                cellList.append(i)
+        print(cellList)
+        outputmatrix = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        for elem in cellList:
+            row = int(elem[7])
+            col = int(elem[9])
+            val = int(elem[11])
+            outputmatrix[row-1][col-1] = val
+        
+        print(outputmatrix)
+        return outputmatrix
         
         # idk if this is needed
-        answer_set =  answer_sets.get_optimal_answer_sets()
+        print(answer_sets)
+
         print("dit is de answer set ding")
         answer_sets.get_answer_sets_string()
+        print("einde answer sets ding")
+
+        # staat in answer_sets
+        answer_set =  answer_sets.get_optimal_answer_sets()
+
+        # answer_set =  answer_sets.get_answer_sets
+        # for ans in answer_set:
+        #     print (ans)
+
+        print("answer set")
+        print(answer_set)
+
+        
         print("patatjes")
         # otherwise
         # answer_set = answer_sets[0]

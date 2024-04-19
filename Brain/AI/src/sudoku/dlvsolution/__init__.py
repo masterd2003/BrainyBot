@@ -1,6 +1,6 @@
 from languages.asp.asp_mapper import ASPMapper
 
-from AI.src.sudoku.dlvsolution.helpers import Edge
+from AI.src.sudoku.dlvsolution.helpers import Edge, X, Y, N, SubGrid
 '''
 def get_ancestor_classes(cls):
     ancestors = []
@@ -16,6 +16,10 @@ def get_ancestor_classes(cls):
 
 # ASPMapper.get_instance().register_class(Swap)
 ASPMapper.get_instance().register_class(Edge)
+ASPMapper.get_instance().register_class(X)
+ASPMapper.get_instance().register_class(Y)
+ASPMapper.get_instance().register_class(N)
+ASPMapper.get_instance().register_class(SubGrid)
 # ASPMapper.get_instance().register_class(InputNode)
 # ASPMapper.get_instance().register_class(InputBomb)
 # ASPMapper.get_instance().register_class(InputHorizontal)
