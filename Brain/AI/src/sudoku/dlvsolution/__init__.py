@@ -1,7 +1,6 @@
 from languages.asp.asp_mapper import ASPMapper
 
-from AI.src.candy_crush.dlvsolution.helpers import Edge, InputBomb, InputNode, InputHorizontal, InputVertical, \
-    AtLeast3Adjacent, Swap
+from AI.src.sudoku.dlvsolution.helpers import Edge
 '''
 def get_ancestor_classes(cls):
     ancestors = []
