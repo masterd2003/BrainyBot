@@ -18,6 +18,7 @@ from AI.src.sudoku.detect.new_detect import MatchingSudoku
 # atm only prints the numbers and doesnt call asp
 # helper should call asp and tappy server to give imputs to the game
 def sudoku(screenshot, debug = False, validation=None,iteration=0):
+    start_time = time.time()
     matcher = MatchingSudoku(screenshot,debug,validation,iteration)
     # print(matcher.find_numbers())
     # print("buttons")
@@ -47,6 +48,7 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
     fieldmatrix = matcher.find_numbers()
     coordinatesMatrix = matcher.get_coordinates()
     buttons = matcher.get_button_coordinates()
+    vision_time = time.time()
     # fieldList = matcher.find_numbers()
     # code from https://www.geeksforgeeks.org/python-program-to-construct-nm-matrix-from-list/
     # n = 9
@@ -64,6 +66,8 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
     # else:
     #     input=[]
     #     tubes=[]
+
+    think_start = time.time()
     if(debug):
         # no idea what canny_threshold is look in ballsort helper
         # return matcher.canny_threshold
@@ -104,6 +108,11 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
             #     os.system(f"python3 client3.py --url http://{TAPPY_ORIGINAL_SERVER_IP}:8000 --light 'tap {x_button} {y_button}'")
             #     time.sleep(0.25)
             #     os.system(f"python3 client3.py --url http://{TAPPY_ORIGINAL_SERVER_IP}:8000 --light 'tap {x} {y}'")
+
+    total_time = time.time()
+    print("vision time = " + str(vision_time - start_time))
+    print("think time = " + str(total_time - think_start))
+    print("total time = " + str(total_time - start_time))
             
 
             
