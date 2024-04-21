@@ -101,6 +101,13 @@ class MatchingSudoku:
         ordered = sorted(numbers_boxes, key=lambda x: x[0] * 10 + x[1] * 100)
         return ordered
     
+    def get_coordinates(self):
+        list = []
+        for coord in self.__numbers_boxes:
+            list.append([coord[0]+(int(coord[2]/2)),coord[1]+(int(coord[3]/2))])
+        return MatchingSudoku.list_to_matrix(list, 9)
+
+    
 
     
     def find_numbers(self):
@@ -115,7 +122,7 @@ class MatchingSudoku:
                     numbers.append(0)
                 else:
                     numbers.append(int(number))
-        return numbers
+        return MatchingSudoku.list_to_matrix(numbers, 9)
 
     
 
@@ -142,4 +149,17 @@ class MatchingSudoku:
                     cv2.putText(output, str(number) if number != None else "0" , (x+10, y+30), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
         cv2.imwrite(f'output/output{i}.png', output)
         return numbers
+    
+    @staticmethod
+    def list_to_matrix(list, n):
+        # code from https://www.geeksforgeeks.org/python-program-to-construct-nm-matrix-from-list/
+        k = 0
+        fieldmatrix = []
+        for idx in range(0, n):
+            sub = []
+            for jdx in range(0, n):
+                sub.append(list[k])
+                k += 1
+            fieldmatrix.append(sub)
+        return fieldmatrix
         

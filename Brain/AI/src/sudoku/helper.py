@@ -41,17 +41,20 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
     #                [0, 1, 2, 3, 0, 0, 8, 0, 4],
     #                [0, 8, 0, 4, 0, 0, 7, 6, 5],
     #                [0, 7, 6, 5, 0, 0, 0, 0, 0]]
-    fieldList = matcher.find_numbers()
+
+    fieldmatrix = matcher.find_numbers()
+    coordinatesMatrix = matcher.get_coordinates()
+    # fieldList = matcher.find_numbers()
     # code from https://www.geeksforgeeks.org/python-program-to-construct-nm-matrix-from-list/
-    n = 9
-    k = 0
-    fieldmatrix = []
-    for idx in range(0, n):
-        sub = []
-        for jdx in range(0, n):
-            sub.append(fieldList[k])
-            k += 1
-        fieldmatrix.append(sub)
+    # n = 9
+    # k = 0
+    # fieldmatrix = []
+    # for idx in range(0, n):
+    #     sub = []
+    #     for jdx in range(0, n):
+    #         sub.append(fieldList[k])
+    #         k += 1
+    #     fieldmatrix.append(sub)
     
     # if fieldmatrix!=None:
     #     input,colors,tubes,balls,on = asp_input(balls_chart)
@@ -81,8 +84,8 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
         for j in range(len(moves[0])):
             x_botton = "x coordinaat van knop " + str(moves[i][j])
             y_button = "y coordinaat van knop " + str(moves[i][j])
-            x = "x coordinaat van vakje" + str(i + 1) + ", " + str(j + 1)
-            y = "y coordinaat van vakje" + str(i + 1) + ", " + str(j + 1)
+            x = "x coordinaat van vakje " + str(i + 1) + ", " + str(j + 1) + " = " + str(coordinatesMatrix[i][j][0])
+            y = "y coordinaat van vakje " + str(i + 1) + ", " + str(j + 1) + " = " + str(coordinatesMatrix[i][j][1])
             print(x_botton, "; ", y_button)
             print(x , "; ", y)
 
