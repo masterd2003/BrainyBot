@@ -57,7 +57,7 @@ class DLVSolution:
         
         print("fixed input program path")
         print(self.__fixed_input_program.get_files_paths())
-        print("kroketjes")
+        # print("kroketjes")
         self.__handler.add_program(self.__static_facts)
         self.__handler.add_program(self.__fixed_input_program)
 
