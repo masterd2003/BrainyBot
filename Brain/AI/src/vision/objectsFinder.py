@@ -250,8 +250,8 @@ class ObjectsFinder:
 
     def find_number(self, x, y, w, h) -> int:
         img = self.__img_matrix[y:y+h, x:x+w].copy()
-        # Upscale the image to improve the OCR if the image is too small
-        if img.shape[0] < 150 or img.shape[1] < 150:
+        # Upscale the image to improve the OCR if the image is too small, normally 150 instead of 100, but the upscaling heavily reduced sudoku accuracy
+        if img.shape[0] < 100 or img.shape[1] < 100:
             img = cv2.resize(img, (round(img.shape[1]*1.5), round(img.shape[0]*1.5)))
             #cv2.imshow('test',img)
             #cv2.waitKey(0)
