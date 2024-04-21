@@ -98,7 +98,7 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
             print(x_str , "; ", y_str)
             
             # only press the button if it wasnt an initially filled in field
-            # if fieldmatrix[i][j] != 0:
+            # if fieldmatrix[i][j] == 0:
 
             #     coordinates.append({'x1': x_button, 'y1': y_button, 'x2': x, 'y2': y})
             #     os.system(f"python3 client3.py --url http://{TAPPY_ORIGINAL_SERVER_IP}:8000 --light 'tap {x_button} {y_button}'")
