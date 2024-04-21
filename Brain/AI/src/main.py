@@ -26,42 +26,42 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
     
-    Start("",args)
+    #Start("",args)
     #game = parser.parse_args()
     #print (f"Taking first screenshot from {constants.SCREENSHOT_SERVER_IP}...")
     # TODO: change ip!
 
-    # if args.test == None:
-    #     screenshot = constants.SCREENSHOT_FILENAME
-    #     # screenshot = "patatjes"
-    #     if not args.debugVision:
-    #         server_ip, port = constants.SCREENSHOT_SERVER_IP, 5432
-    #         try:
-    #             if getScreenshot(server_ip, port):
-    #                 print("SCREENSHOT TAKEN.")
-    #             else:
-    #                 exit(1)
-    #         except Exception as e:
-    #             print(e)
-    #             exit(1)
-    #     else:
-    #         screenshot=""
-    #         if args.screenshot == None:
-    #             screenshot = args.games+"Test.jpg"
-    #         else:
-    #             screenshot = args.screenshot
-    #         print("DEBUG MODE ON")   
-    #         print(screenshot)
-    #     Start(screenshot,args)
-    # else:
-    #     if args.games == "ball_sort":
-    #         print("Screenshot\t#FullTubes\t#EmptyTubes\t#Balls\t#Colors", file=sys.stderr)
-    #     for filename in os.listdir(constants.SCREENSHOT_PATH):
-    #         if filename.startswith(args.test):
-    #             screenshot = filename
-    #             print(f"{screenshot}")
-    #             print(f"{screenshot.split('.')[1]}\t",end='',file=sys.stderr)
-    #             Start(screenshot,args)
+    if args.test == None:
+        screenshot = constants.SCREENSHOT_FILENAME
+         # screenshot = "patatjes"
+        if not args.debugVision:
+            server_ip, port = constants.SCREENSHOT_SERVER_IP, 5432
+            try:
+                if getScreenshot(server_ip, port):
+                    print("SCREENSHOT TAKEN.")
+                else:
+                    exit(1)
+            except Exception as e:
+                print(e)
+                exit(1)
+        else:
+            screenshot=""
+            if args.screenshot == None:
+                screenshot = args.games+"Test.jpg"
+            else:
+                screenshot = args.screenshot
+            print("DEBUG MODE ON")   
+            print(screenshot)
+        Start(screenshot,args)
+    else:
+        if args.games == "ball_sort":
+            print("Screenshot\t#FullTubes\t#EmptyTubes\t#Balls\t#Colors", file=sys.stderr)
+        for filename in os.listdir(constants.SCREENSHOT_PATH):
+            if filename.startswith(args.test):
+                screenshot = filename
+                print(f"{screenshot}")
+                print(f"{screenshot.split('.')[1]}\t",end='',file=sys.stderr)
+                Start(screenshot,args)
     
     
 

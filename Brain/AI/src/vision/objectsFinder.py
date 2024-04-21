@@ -20,7 +20,7 @@ class ObjectsFinder:
         # Use Matrix2.png for testing
         #
         self.validation=validation
-        self.__img_matrix = getImg(os.path.join(SCREENSHOT_PATH, screenshot),color_conversion=color) 
+        self.__img_matrix = getImg(os.path.join(SCREENSHOT_PATH, screenshot),color_conversion=color)
         self.__output = self.__img_matrix.copy()  
         self.__blurred = cv2.medianBlur(self.__img_matrix,5)  # Used to find the color of the balls
         self.__gray = getImg(os.path.join(SCREENSHOT_PATH, screenshot),color_conversion=cv2.COLOR_BGR2GRAY)  # Used to find the balls
@@ -237,8 +237,10 @@ class ObjectsFinder:
         boxes = self.find_boxes()
         for box in boxes:
             x, y, w, h = box
-            cv2.rectangle(mat_contour, (x, y), (x + w, y + h), 255, thickness=1, lineType=cv2.LINE_AA)
+            color = 255
+            testview =cv2.rectangle(mat_contour, (x, y), (x + w, y + h), color, thickness=1, lineType=cv2.LINE_AA)
         boxes, hierarchy = cv2.findContours(mat_contour, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        cv2.imwrite('testestestest.jpg',testview)
         return boxes, hierarchy[0]
 
     def find_text(self, x, y, w, h) -> str:

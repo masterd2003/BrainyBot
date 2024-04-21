@@ -1,10 +1,14 @@
+import os
+
 from AI.src.vision.objectsFinder import ObjectsFinder
 import cv2
 from math import sqrt
+from AI.src.constants import SCREENSHOT_PATH
 
 class MatchingSudoku:
     def __init__(self, screenshot_path, debug = False,validation=None,iteration=0):
-        self.__image = cv2.imread(screenshot_path)
+        self.screenshot = os.path.join(SCREENSHOT_PATH,screenshot_path)
+        self.__image = cv2.imread(self.screenshot)
         self.__finder = ObjectsFinder(screenshot_path)
         self.__debug = debug
         self.__matrix = None
@@ -35,6 +39,22 @@ class MatchingSudoku:
 
 
     def __find_matrix(self, boxes, hierarchy):
+        newBoxes = []
+        for i in range(len(boxes)):
+            x, y, w, h = cv2.boundingRect(boxes[i])
+            newBoxes.append((x, y, w, h))
+        area = 0
+        largestBoxIndex = 0
+        for box in newBoxes:
+            if box[2]*box[3] > area:
+                area = box[2] * box[3]
+                largestBoxIndex = newBoxes.index(box)
+        print("Largest Box")
+        print(newBoxes[largestBoxIndex])
+        print(area)
+        print(largestBoxIndex)
+        print(hierarchy[largestBoxIndex])
+        """
         dictionary = {}
         for h in hierarchy:
             if h[3] != -1:
@@ -42,6 +62,7 @@ class MatchingSudoku:
                     dictionary[h[3]] += 1
                 else:
                     dictionary[h[3]] = 1
+        print(dictionary)
         possibleMatrix = []
         for key in dictionary:
             if sqrt(dictionary[key]).is_integer() and dictionary[key] > 3:
@@ -55,17 +76,36 @@ class MatchingSudoku:
                 max = dictionary[key]
                 index = key
         return index
+        """
+        return largestBoxIndex
     
     def __find_numbers_boxes(self, boxes, hierarchy, matrix_index):
         numbers_boxes = []
-        for i in range(len(hierarchy)):
-            if hierarchy[i][3] == matrix_index:
-                numbers_boxes.append(cv2.boundingRect(boxes[i]))
+        numbers_boxes_index = []
+        parents = []
+        added = 1
+        parents.append(matrix_index)
+        while added != 0:
+            added = 0
+            for i in range(len(hierarchy)):                       
+                if hierarchy[i][3] in parents:
+                        if i not in parents and hierarchy[i][2] != -1:
+                            parents.append(i)
+                            added+=1
+                        elif hierarchy[i][2] == -1 and i not in numbers_boxes_index:
+                            numbers_boxes_index.append(i)
+                            numbers_boxes.append(cv2.boundingRect(boxes[i]))
+                            added+=1
+                        
         ordered = sorted(numbers_boxes, key=lambda x: x[0] * 10 + x[1] * 100)
         return ordered
     
+
+    
     def find_numbers(self):
         numbers = []
+        print("number of boxes")
+        print(self.__numbers_boxes)
         if self.__numbers_boxes != None:
             for box in self.__numbers_boxes:
                 x, y, w, h = box
@@ -75,6 +115,8 @@ class MatchingSudoku:
                 else:
                     numbers.append(int(number))
         return numbers
+
+    
 
     def __cut_image_to_matrix(self):
         x, y, w, h = self.__matrix
