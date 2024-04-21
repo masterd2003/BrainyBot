@@ -19,9 +19,9 @@ from AI.src.sudoku.detect.new_detect import MatchingSudoku
 # helper should call asp and tappy server to give imputs to the game
 def sudoku(screenshot, debug = False, validation=None,iteration=0):
     matcher = MatchingSudoku(screenshot,debug,validation,iteration)
-    print(matcher.find_numbers())
-    print("buttons")
-    print(matcher.sudoku_buttons)
+    # print(matcher.find_numbers())
+    # print("buttons")
+    # print(matcher.sudoku_buttons)
     debug = False
 
     zeros = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -46,6 +46,7 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
 
     fieldmatrix = matcher.find_numbers()
     coordinatesMatrix = matcher.get_coordinates()
+    buttons = matcher.get_button_coordinates()
     # fieldList = matcher.find_numbers()
     # code from https://www.geeksforgeeks.org/python-program-to-construct-nm-matrix-from-list/
     # n = 9
@@ -76,6 +77,7 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
 
     os.chdir(CLIENT_PATH)
 
+    coordinates = []
     button_x, button_y, x, y = 0, 0, 0, 0
     if moves == zeros:
         print("No moves found.")
@@ -84,12 +86,22 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
     
     for i in range(len(moves)):
         for j in range(len(moves[0])):
-            x_botton = "x coordinaat van knop " + str(moves[i][j])
-            y_button = "y coordinaat van knop " + str(moves[i][j])
-            x = "x coordinaat van vakje " + str(i + 1) + ", " + str(j + 1) + " = " + str(coordinatesMatrix[i][j][0])
-            y = "y coordinaat van vakje " + str(i + 1) + ", " + str(j + 1) + " = " + str(coordinatesMatrix[i][j][1])
-            print(x_botton, "; ", y_button)
-            print(x , "; ", y)
+            x_button = buttons[moves[i][j]-1][0]
+            y_button = buttons[moves[i][j]-1][1]
+            x = coordinatesMatrix[i][j][0]
+            y = coordinatesMatrix[i][j][1]
+            x_button_str = "x coordinaat van knop " + str(moves[i][j]) + " = " + str(x_button)
+            y_button_str = "y coordinaat van knop " + str(moves[i][j]) + " = " + str(y_button)
+            x_str = "x coordinaat van vakje " + str(i + 1) + ", " + str(j + 1) + " = " + str(x)
+            y_str = "y coordinaat van vakje " + str(i + 1) + ", " + str(j + 1) + " = " + str(y)
+            print(x_button_str, "; ", y_button_str)
+            print(x_str , "; ", y_str)
+
+            # coordinates.append({'x1': button_x, 'y1': button_x, 'x2': x, 'y2': y})
+            # os.system(f"python3 client3.py --url http://{TAPPY_ORIGINAL_SERVER_IP}:8000 --light 'tap {button_x} {button_y}'")
+            # time.sleep(0.25)
+            # os.system(f"python3 client3.py --url http://{TAPPY_ORIGINAL_SERVER_IP}:8000 --light 'tap {x} {y}'")
+            
 
             
 

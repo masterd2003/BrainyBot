@@ -117,6 +117,13 @@ class MatchingSudoku:
         for coord in self.__numbers_boxes:
             list.append([coord[0]+(int(coord[2]/2)),coord[1]+(int(coord[3]/2))])
         return MatchingSudoku.list_to_matrix(list, 9)
+    
+    def get_button_coordinates(self):
+        list = []
+        for coord in self.sudoku_buttons:
+            list.append([coord[0]+(int(coord[2]/2)),coord[1]+(int(coord[3]/2))])
+        return list
+
 
     
 
