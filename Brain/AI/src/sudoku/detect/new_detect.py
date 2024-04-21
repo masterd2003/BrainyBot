@@ -31,6 +31,7 @@ class MatchingSudoku:
             return False
         self.__matrix = cv2.boundingRect(boxes[matrix_index])
         self.__numbers_boxes = self.__find_numbers_boxes(boxes, hierarchy, matrix_index)
+        self.sudoku_buttons = self.__get_sudoku_buttons(boxes,hierarchy)
 
     def get_numbers(self):
         for i in range(len(self.__numbers_boxes)):
@@ -78,6 +79,16 @@ class MatchingSudoku:
         """
         return largestBoxIndex
     
+    def __get_sudoku_buttons(self,boxes,hierarchy):
+        total_height,_,_ = self.__image.shape
+        buttons = []
+        for  i in range(len(hierarchy)):
+            x,y,w,h = cv2.boundingRect(boxes[i])
+            if y > total_height*0.657 and y<total_height*0.877 and hierarchy[i][2] == -1:
+                buttons.append(cv2.boundingRect(boxes[i]))
+        ordered = sorted(buttons,key=lambda x: x[0] * 10 + x[1] * 100)
+        return ordered
+    
     def __find_numbers_boxes(self, boxes, hierarchy, matrix_index):
         numbers_boxes = []
         numbers_boxes_index = []
@@ -123,6 +134,18 @@ class MatchingSudoku:
                 else:
                     numbers.append(int(number))
         return MatchingSudoku.list_to_matrix(numbers, 9)
+    
+    def find_button_numbers(self):
+        buttons = []
+        if self.__sudoku_buttons != None:
+            for button in self.__sudoku_buttons:
+                x, y, w, h = button
+                number = self.__finder.find_number(x, y, w, h)
+                if number == None:
+                    buttons.append(0)
+                else:
+                    buttons.append(int(number))
+        return buttons
 
     
 
