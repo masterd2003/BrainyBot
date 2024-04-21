@@ -253,6 +253,8 @@ class ObjectsFinder:
         # Upscale the image to improve the OCR if the image is too small
         if img.shape[0] < 150 or img.shape[1] < 150:
             img = cv2.resize(img, (round(img.shape[1]*1.5), round(img.shape[0]*1.5)))
+            #cv2.imshow('test',img)
+            #cv2.waitKey(0)
         elem = ts.image_to_string(img, config='--psm 6 --oem 1 -c tessedit_char_whitelist=0123456789')
         if elem == '':
             elem = ts.image_to_string(img, config='--psm 7 --oem 1 -c tessedit_char_whitelist=0123456789')

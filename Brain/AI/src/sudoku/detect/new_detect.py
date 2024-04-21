@@ -51,7 +51,6 @@ class MatchingSudoku:
                 largestBoxIndex = newBoxes.index(box)
         print("Largest Box")
         print(newBoxes[largestBoxIndex])
-        print(area)
         print(largestBoxIndex)
         print(hierarchy[largestBoxIndex])
         """
@@ -93,9 +92,11 @@ class MatchingSudoku:
                             parents.append(i)
                             added+=1
                         elif hierarchy[i][2] == -1 and i not in numbers_boxes_index:
-                            numbers_boxes_index.append(i)
-                            numbers_boxes.append(cv2.boundingRect(boxes[i]))
-                            added+=1
+                            x,y,w,h = cv2.boundingRect(boxes[i])
+                            if w>100 and h>100:
+                                numbers_boxes_index.append(i)
+                                numbers_boxes.append(cv2.boundingRect(boxes[i]))
+                                added+=1
                         
         ordered = sorted(numbers_boxes, key=lambda x: x[0] * 10 + x[1] * 100)
         return ordered
