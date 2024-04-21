@@ -50,10 +50,10 @@ class MatchingSudoku:
             if box[2]*box[3] > area:
                 area = box[2] * box[3]
                 largestBoxIndex = newBoxes.index(box)
-        print("Largest Box")
-        print(newBoxes[largestBoxIndex])
-        print(largestBoxIndex)
-        print(hierarchy[largestBoxIndex])
+        #print("Largest Box")
+        #print(newBoxes[largestBoxIndex])
+        #print(largestBoxIndex)
+        #print(hierarchy[largestBoxIndex])
         """
         dictionary = {}
         for h in hierarchy:
@@ -130,8 +130,8 @@ class MatchingSudoku:
     
     def find_numbers(self):
         numbers = []
-        print("number of boxes")
-        print(self.__numbers_boxes)
+        #print("number of boxes")
+        #print(self.__numbers_boxes)
         if self.__numbers_boxes != None:
             for box in self.__numbers_boxes:
                 x, y, w, h = box
