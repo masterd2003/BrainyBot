@@ -114,6 +114,7 @@ def sudoku(screenshot, debug = False, validation=None,iteration=0):
 
     total_time = time.time()
     total_process_time = time.process_time()
+    print("empty fields: " + str(count_zeros(fieldmatrix)))
     print("actual time:")
     print("vision time = " + str(vision_time - start_time))
     print("think time = " + str(total_time - think_start))
@@ -176,4 +177,12 @@ def sudoku1(screenshot, debug = False, validation=None,iteration=0):
         os.system(f"python3 client3.py --url http://{TAPPY_ORIGINAL_SERVER_IP}:8000 --light 'tap {button_x} {button_y}'")
         time.sleep(0.25)
         os.system(f"python3 client3.py --url http://{TAPPY_ORIGINAL_SERVER_IP}:8000 --light 'tap {x} {y}'")
+
+def count_zeros(fieldmatrix):
+    count = 0
+    for i in range(len(fieldmatrix)):
+        for j in range(len(fieldmatrix[0])):
+            if fieldmatrix[i][j] == 0:
+                count += 1
+    return count
         
